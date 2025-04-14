@@ -1,0 +1,12 @@
+node_modules/
+
+*.log
+
+prisma/dev.db
+prisma/migrations/
+
+.env
+
+/dist
+
+docker-compose.override.yml
