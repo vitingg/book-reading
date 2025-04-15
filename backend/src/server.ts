@@ -1,16 +1,17 @@
-import { express } from "express"
-import { cors} from "cors"
+import 'dotenv/config'
+import express from "express"
+import booksRouter from "./routes/booksRoutes"
+import { createBook, getAllBooks, updateBook, deleteBook } from "./controller/booksController"
 
-const app = express();
-const PORT = 3000;
+const app = express()
+const PORT = 3000
 
-app.use(cors());
-app.use(express.json());
+app.use(express.json())
 
-app.get('/', (req, res) => {
-  res.send('Servidor rodando com Express + Prisma + Docker!');
-});
+app.use("/api", booksRouter)
 
 app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+    console.log(`Server is running on port ${PORT}`);
+})
+
+console.log('DATABASE_URL:', process.env.DATABASE_URL);
