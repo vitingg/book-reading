@@ -15,10 +15,9 @@ export const createBook = async (req: Request, res:Response, next:NextFunction) 
                 title,
                 author,
                 description,
-                releaseDate: new Date(releaseData)
+                releaseDate: new Date(req.body.releaseDate),
             }
         })
-
         res.status(201).json(book)
     } catch (error) {
         next(error)
