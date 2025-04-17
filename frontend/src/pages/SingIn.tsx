@@ -1,8 +1,13 @@
+import { Form } from "../components/Form"
+
 export function SingIn() {
   return (
     <div>
-      <h1>Conheça meu site especializado em leituras</h1>
-      <h2>Faça seu login</h2>
+      <main className="w-full h-screen bg-neutral-950">
+        <h1 className="text-gray-300">Conheça nosso site de livro!</h1>
+        <Form />
+      </main>
     </div>
+
   )
 }

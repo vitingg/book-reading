@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+@theme {
+    --color-red-100: #432a08;
+    --color-red-200: #553a17;
+    --color-red-300: #664927;
+    --color-red-400: #785936;
+    --color-red-500: #896845;
+
+    --font-special: "Open Sans", sans-serif;
+
+}
+
+* {
+    box-sizing: border-box;    
+    padding: 0;
+    margin: 0;
+}
+
+
+
