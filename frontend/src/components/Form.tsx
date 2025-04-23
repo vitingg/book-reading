@@ -1,22 +1,24 @@
 export function Form() {
-    return (
-        <div className="flex items-center justify-center h-screen bg-neutral-950">
-  <form className="bg-red-300 p-6 border border-none rounded-lg w-full max-w-md">
-    <h2 className="text-2xl font-bold mb-4 text-center">Sign In</h2>
-    <input
-      type="text"
-      placeholder="Username"
-      className="w-full mb-3 p-2 border border-gray-300 rounded"
-    />
-    <input
-      type="text"
-      placeholder="Put your role here"
-      className="w-full mb-4 p-2 border border-gray-300 rounded"
-    />
-    <button className="w-full bg-blue-500 hover:bg-blue-600 text-white p-2 rounded transition">
-      Sign In
-    </button>
-  </form>
-</div>
-    )
+  return (
+      <div className="flex flex-col items-center justify-center h-full overflow-hidden gap-3">
+
+        <input className="text-black bg-gray-200 h-16 w-100 p-7
+        border-gray-400 border rounded-lg hover:border-gray-500 
+        hover:opacity-40 focus:outline-gray-500
+        text-xl" 
+        type="text" placeholder="Insira seu nome!"/>
+
+        <input className="text-black bg-gray-200 h-16 w-100 
+        border-gray-400 border rounded-lg p-7 hover:border-gray-500 
+        hover:opacity-40 focus:outline-gray-500
+        text-xl " 
+        type="text" placeholder="Insira seu cargo!"/>
+
+        <button className="text-black border-gray-400 text-xl 
+        bg-gray-200 border rounded-lg p-3 h-16 w-80
+        hover:border-gray-500 hover:opacity-40"
+        >submit
+        </button>
+      </div>
+  )
 }
