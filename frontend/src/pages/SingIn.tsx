@@ -14,7 +14,7 @@ export function SingIn() {
         <div className="h-screen flex flex-col items-center 
         justify-center relative" >
       
-          <div className="flex items-center justify-center text-6xl font-family font-medium font-stretch-condensed">
+          <div className="flex items-center justify-center text-6xl font-family font-medium font-stretch-condensed mt-20">
           Conheça nosso site de livros!
         </div>
       <div className="grid grid-cols-2 gap-60">

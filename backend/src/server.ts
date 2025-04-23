@@ -13,6 +13,8 @@ app.use(express.json())
 app.use("/api", booksRouter)
 app.use("/users", usersRouter)
 app.use("/api/read", readBookRouter)
+app.use("/uploads", express.static("uploads"));
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

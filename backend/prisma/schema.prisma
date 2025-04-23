@@ -20,6 +20,8 @@ model Book {
   author      String
   description String
   releaseDate DateTime
+  coverImageUrl String?
+  
   readers     ReadBook[]
 }
 

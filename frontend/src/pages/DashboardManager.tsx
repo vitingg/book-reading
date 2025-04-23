@@ -6,14 +6,14 @@ import {
   UserCircle,
   BarChart,
   LayoutDashboard,
-
 } from "lucide-react";
 
 
 export function DashboardManager() {
   return (
     <>
-    <div className="relative z-10 flex h-screen bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-white gap-2" >
+    <div className="relative z-10 flex h-screen bg-gray-100 text-gray-800 
+    dark:bg-gray-900 dark:text-white gap-2" >
       <SidebarWork />
       <div className="flex-1 p-6 overflow-auto">
         <nav className="">

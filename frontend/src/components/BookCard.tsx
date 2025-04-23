@@ -20,11 +20,11 @@ const BookCard: React.FC<BookProps> = ({
   onDelete
 }) => {
   return (
-    <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-8 w-full flex flex-col justify-start h-full">
-      <h1 className="text-3xl font-semibold text-gray-900 dark:text-white">{title}</h1>
-      <p className="text-gray-600 dark:text-gray-300">Author: {author}</p>
-      <p className="text-gray-600 dark:text-gray-300">Release Date: {releaseDate}</p>
-      <p className="text-gray-600 dark:text-gray-300">{description}</p>
+    <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-5 w-full flex flex-col justify-start h-full">
+      <h3 className="text-3xl font-semibold text-gray-900 dark:text-white p-2 pb-4 font-rodrigo ">{title}</h3>
+      <p className="text-gray-600 dark:text-gray-300 p-1"><span className="font-medium"> Author: </span> {author}</p>
+      <p className="text-gray-600 dark:text-gray-300 p-1"><span className="font-medium"> Release Date: </span>{releaseDate}</p>
+      <p className="text-gray-600 dark:text-gray-300 p-1 pb-4"><span className="font-medium"> Description: </span> {description}</p>
 
       {onAddToProfile && (
         <button

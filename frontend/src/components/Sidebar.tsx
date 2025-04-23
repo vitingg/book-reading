@@ -27,7 +27,7 @@ export function Sidebar({ children }: SidebarProps) {
   return (
     <aside className="h-full">
       <nav className="h-full flex flex-col bg-gray-100 border-r shadow-sm text-black 
-      dark:bg-gray-400 dark:text-white dark:border-gray-100">
+      dark:bg-gray-700 dark:text-white dark:border-gray-100">
         <div className="p-4 pb-2 flex justify-between items-center">
           <img
             src={logo}
@@ -53,7 +53,7 @@ export function Sidebar({ children }: SidebarProps) {
           >
             <div className="leading-4">
               <h4 className="font-semibold">John Doe</h4>
-              <span className="text-xs text-gray-600">johndoe@gmail.com</span>
+              <span className="text-xs text-gray-600 dark:text-gray-100">johndoe@gmail.com</span>
             </div>
             <MoreVertical />
           </div>
@@ -80,8 +80,8 @@ export function SidebarItem({ icon, text, active = false, alert = false }: Sideb
         transition-colors 
         ${
           active
-            ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800'
-            : 'hover:bg-indigo-50 text-gray-600 '
+            ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-900'
+            : 'hover:bg-indigo-50 text-gray-600 dark:text-gray-100 '
         }
       `}
     >
@@ -107,7 +107,7 @@ export function SidebarItem({ icon, text, active = false, alert = false }: Sideb
           absolute left-full rounded-md px-2 py-1 ml-6
           bg-indigo-100 text-indigo-800 text-sm 
           invisible opacity-20 -translate-x-3 transition-all
-          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0 
+          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
         `}
         >
           {text}

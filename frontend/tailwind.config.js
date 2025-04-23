@@ -7,9 +7,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        rodrigo: ['Inter', 'sans-serif'],
+      },
       backgroundColor: {
       },
       colors: {
+        
       },
       keyframes: {
         growFadeIn: {
