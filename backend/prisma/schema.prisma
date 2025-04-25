@@ -8,30 +8,28 @@ datasource db {
 }
 
 model User {
-  id        Int         @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
   name      String
   role      Role
   readBooks ReadBook[]
 }
 
 model Book {
-  id          Int         @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   title       String
   author      String
   description String
   releaseDate DateTime
-  coverImageUrl String?
-  
   readers     ReadBook[]
 }
 
 model ReadBook {
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
   userId    Int
-  book      Book     @relation(fields: [bookId], references: [id])
   bookId    Int
   createdAt DateTime @default(now())
+  book      Book     @relation(fields: [bookId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 enum Role {
