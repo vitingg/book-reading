@@ -1,27 +1,31 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { ArrowRightToLine, ArrowLeftToLine, MoreVertical } from 'lucide-react';
-
+import { createContext, useContext, useState, ReactNode } from 'react'
+import { ArrowRightToLine, ArrowLeftToLine, MoreVertical } from 'lucide-react'
 import logo from "../assets/logo.png"
 import johndoe from "../assets/johndoe.jpeg"
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
 type SidebarContextType = {
-  expanded: boolean;
+  expanded: boolean
 }
 
 type SidebarItemProps = {
-  icon: ReactNode;
-  text: string;
-  active?: boolean;
-  alert?: boolean;
+  icon: ReactNode
+  text: string
+  active?: boolean
+  alert?: boolean
+  onClick?: () => void
 }
+
 
 type SidebarProps = {
   children: ReactNode;
 }
 
 export function Sidebar({ children }: SidebarProps) {
+  const user = JSON.parse(localStorage.getItem('user') || '{}')
+  const userName = user.name
+
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -32,11 +36,16 @@ export function Sidebar({ children }: SidebarProps) {
           <img
             src={logo}
             alt=""
-            className={`overflow-hidden transition-all ${expanded ? 'w-32' : 'w-0'}`}
+            className={`overflow-hidden transition-all 
+            ${expanded ? 'w-32' : 'w-0'}
+            `}
           />
-          <button onClick={() => setExpanded((curr) => !curr)} className="p-1.5 rounded-md">
-            {expanded ? <ArrowLeftToLine /> : <ArrowRightToLine />}
-          </button>
+          <>
+            <button onClick={() => setExpanded((curr) => !curr)} className="p-1.5 
+            rounded-md">
+              {expanded ? <ArrowLeftToLine /> : <ArrowRightToLine />}
+            </button>
+          </>
         </div>
 
         <SidebarContext.Provider value={{ expanded }}>
@@ -52,8 +61,8 @@ export function Sidebar({ children }: SidebarProps) {
             ${expanded ? 'w-52 ml-3' : 'w-0'} `}
           >
             <div className="leading-4">
-              <h4 className="font-semibold">John Doe</h4>
-              <span className="text-xs text-gray-600 dark:text-gray-100">johndoe@gmail.com</span>
+              <h4 className="font-semibold">{userName}</h4>
+              <span className="text-xs text-gray-600 dark:text-gray-100">{userName}@gmail.com</span>
             </div>
             <MoreVertical />
           </div>
@@ -64,7 +73,7 @@ export function Sidebar({ children }: SidebarProps) {
 }
 
 
-export function SidebarItem({ icon, text, active = false, alert = false }: SidebarItemProps) {
+export function SidebarItem({ icon, text, active = false, alert = false, onClick }: SidebarItemProps) {
   const context = useContext(SidebarContext);
 
   
@@ -74,6 +83,7 @@ export function SidebarItem({ icon, text, active = false, alert = false }: Sideb
 
   return (
     <li
+      onClick={onClick}
       className={`
         relative flex items-center py-2 px-3 my-1
         font-medium rounded-md cursor-pointer

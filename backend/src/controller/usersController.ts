@@ -41,7 +41,7 @@ export const getUserByName = async (req:Request, res: Response) => {
     }
 
     try {
-        const user = await prisma.user.findMany({
+        const user = await prisma.user.findFirst({
             where: {
                 name
             },

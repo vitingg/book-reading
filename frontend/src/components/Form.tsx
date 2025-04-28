@@ -6,30 +6,47 @@ import { api } from "../services/api"
 export function Form() {
   const navigate = useNavigate()
   const [name, setName] = useState("")
-  const [role, setRole] = useState<"EMPLOYEE" | "MANAGER">("EMPLOYEE")
+  const [role, setRole] = useState<"EMPLOYEE" | "MANAGER">()
 
   const handleSignIn = async () => {
+
+    if (!name || name.trim() === "") {
+      alert("Por favor, insira um nome válido")
+      return
+    }
+
     try {
-      const response = await api.get(`users/search?name=${name}`)
-      console.log(response.data);
+      const response = await api.get(`/users/search?name=${name}`)
       let user = response.data
 
       if (!user) {
-        const createRes = await api.post(`/user`, {name, role})
+        const createRes = await api.post(`/user`, { name, role });
+        user = createRes.data;
+      }
+    
+      if (user) {
+        if (user.role !== role) {
+          alert("Role inválido deste usuário.");
+          return
+        }
+      } else {
+        const createRes = await api.post(`/user`, { name, role });
         user = createRes.data
       }
-
+  
       localStorage.setItem("user", JSON.stringify(user))
-
-      if(user.role === "EMPLOYEE"){
-        navigate("/employee")
+  
+      if (user.role === "EMPLOYEE") {
+        navigate("/client")
+      } else if (user.role === "MANAGER") {
+        navigate("/manager")
       } else {
-      navigate("/manager")
+        alert("Cargo inválido.")
       }
-
-    } catch (error) {
-      console.log(error);
-      alert("Usuário não encontrado")
+  
+    } catch (err) {
+      console.error("Erro ao logar:", err)
+      alert("Erro ao fazer login.")
     }
   }
 

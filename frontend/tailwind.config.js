@@ -23,7 +23,7 @@ module.exports = {
           },
           '100%': {
             opacity: '1',
-            width: '18.75rem', // ou '300px'
+            width: '18.75rem',
           },
         },
       },
