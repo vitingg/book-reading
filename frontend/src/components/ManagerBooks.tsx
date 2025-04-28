@@ -1,26 +1,44 @@
-import {BookCard} from './BookCard';
+import { BookCard } from './BookCard';
+import { useEffect, useState } from 'react';
+import { api } from '../services/api';
 
-export function ManagerBooks() {
-  const books = [
-    {id: 1, title: "Livro 1", author: "Antoine", description: "O pequeno e ainda era principe", releaseDate: "1943"},
-    {id: 2, title: "Livro 2", author: "Antoina", description: "Teste", releaseDate: "1945"},
-    {id: 1, title: "Livro 3", author: "Antoine", description: "Teste", releaseDate: "1943"},
-    {id: 2, title: "Livro 4", author: "Antoina", description: "Teste", releaseDate: "1945"},
-    {id: 1, title: "Livro 5", author: "Antoine", description: "Teste", releaseDate: "1943"},
-    {id: 2, title: "Livro 6", author: "Antoina", description: "Teste", releaseDate: "1945"},
-    {id: 1, title: "Livro 7", author: "Antoine", description: "Teste", releaseDate: "1943"},
-    {id: 2, title: "Livro 8", author: "Antoina", description: "Teste", releaseDate: "1945"},
+type Book = {
+  id: number
+  title: string
+  author: string
+  description: string
+  releaseDate: string
+}
 
-    
-  ]
+type ManagerBookProps = {
+  refresh: boolean
+}
+
+
+export function ManagerBooks({refresh}: ManagerBookProps) {
+  const [books, setBooks] = useState<Book[]>([])
+
 
   const handleEdit = (bookId: number) => {
     console.log('Edit book', bookId);
-  };
+  }
 
   const handleDelete = (bookId: number) => {
     console.log('Delete book', bookId);
-  };
+  }
+
+  async function fetchBooks() {
+    try {
+      const response = await api.get("/books")
+      setBooks(response.data)
+    } catch (error) {
+      console.log('Erros ao buscar os livros:', error)
+    }
+  }
+
+  useEffect(() => {
+    fetchBooks()
+  }, [refresh])
 
   return (
     <div className="flex flex-wrap gap-4">
