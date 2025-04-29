@@ -1,8 +1,8 @@
 import { Sidebar, SidebarItem } from "../components/Sidebar";
-import { ManagerBooks } from "../components/ManagerBooks"
+// import { ManagerBooks } from "../components/ManagerBooks"
 import { CreateBook } from "../components/popups/CreateBook"
-import { UpdateBook } from "../components/popups/UpdateBook";
-import { DeleteBook } from "../components/popups/DeleteBook";
+
+
 import { ThemeToggle } from '../components/ToggleTheme';
 import { useState } from "react";
 import {
@@ -24,7 +24,6 @@ export function DashboardManager() {
 
 
   return (
-    <>
     <div className="relative z-10 flex h-screen bg-gray-100 
     text-gray-800 dark:bg-gray-900 dark:text-white gap-2" >
       <SidebarWork setOpenPopup={setOpenPopup}
@@ -37,11 +36,11 @@ export function DashboardManager() {
               </h1>
               <ThemeToggle />
             </div>
-              <ManagerBooks refresh={refreshBooks}/>
+            
+              
           </div>
       </div>
     </div>
-    </>
   )
 }
 

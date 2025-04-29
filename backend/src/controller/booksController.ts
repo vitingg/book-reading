@@ -2,14 +2,12 @@
     import { PrismaClient } from "@prisma/client"
     import { RequestHandler } from "express";
 
-
-
     const prisma = new PrismaClient()
 
     // creating book route
     export const createBook = async (req: Request, res:Response, next:NextFunction) => {
 
-        const {title, author, description, releaseData} = req.body
+        const {title, author, description, coverImageUrl} = req.body
         
         try {
             const book = await prisma.book.create({
@@ -17,7 +15,8 @@
                     title,
                     author,
                     description,
-                    releaseDate: new Date(releaseData),
+                    releaseDate: new Date(),
+                    coverImageUrl
                 }
             })
             
@@ -78,7 +77,6 @@
             next(error)
             alert("sorry, cant delete this book rn")
         }
-
     }
 
     export const uploadImage: RequestHandler = (req: Request, res:Response) => {

@@ -1,6 +1,15 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { api } from "../../services/api";
-import { AxiosError } from "axios";
+
+
+type FormDate = {
+  bookCape: FileList
+  name: string
+  author: string
+  description: string
+  releaseDate: string
+} 
 
 type CreateBookProps = {
   onClose: () => void;
@@ -10,68 +19,55 @@ type CreateBookProps = {
 
 export function CreateBook({ onClose, onBookCreated}: CreateBookProps) {
   const [preview, setPreview] = useState<string | null>(null)
-  const [title, setTitle] = useState("")
-  const [author, setAuthor] = useState("")
-  const [description, setDescription] = useState("")
-  const [releaseDate, setReleaseDate] = useState("")
-  const [image, setImage] = useState<File | null>(null)
+  const { register, handleSubmit, watch, reset } = useForm<FormDate>()
+  const selectedImage = watch("bookCape")
+
+  useEffect(() => {
+  if (selectedImage && selectedImage.length > 0){
+    const file = selectedImage[0]
+    const previewUrl = URL.createObjectURL(file)
+    setPreview(previewUrl)
+
+    return () => URL.revokeObjectURL(previewUrl)
+  }    
+  }, [selectedImage])
 
 
-  function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
 
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = () => {
-        setPreview(reader.result as string)
-      };
-      reader.readAsDataURL(file)
-      setImage(file)
-    }
-  }
-
-  async function handleSave(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+  const onSubmit = async (date: FormDate) => {
     try {
-      const formData = new FormData(event.currentTarget)
-
-
-      formData.append("title", title)
-      formData.append("author", author)
-      formData.append("description", description)
-      formData.append("releaseDate", releaseDate)
-
-
-      if(image) {
-        formData.append("coverImage", image)
-      }
-    
-      const formValues =  Object.fromEntries(formData)
+      let imageUrl = ""
       
+      if(date.bookCape && date.bookCape.length > 0) {
+        const imageFile = date.bookCape[0]
+        const formData = new FormData()
 
-      await api.post("/api", formValues, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        formData.append("file", imageFile)
+
+        const uploadResponse = await api.post("/api/upload", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        imageUrl = uploadResponse.data.imageUrl
+      }
+
+      await api.post("/api", {
+        name: date.name,
+        author: date.author,
+        description: date.description,
+        coverImageUrl: imageUrl
       })
-      
+
       onBookCreated()
+      reset()
       onClose()
-      
+
     } catch (error) {
-      if (error instanceof AxiosError){
-        console.error("Erro na requisição:", error.response?.data);
-        console.error("Status do erro:", error.response?.status);
-        console.error("Detalhes:", error.response?.headers);
-      } else {
-        console.error("Erro desconhecido:", error);
-      }
-      
+      console.log("este erro esta vindo da função onSubmit: ", error)
+      alert("Erro ao criar livro!")
     }
-  }
+  } 
 
   return (
-
     <div className="fixed inset-0 flex 
     items-center justify-center z-50">
       <div className="absolute inset-0 
@@ -87,11 +83,9 @@ export function CreateBook({ onClose, onBookCreated}: CreateBookProps) {
         </h2>
 
         <div className="flex justify-around gap-4">
-
-          
-            <div className="">
+            <div>
               <label 
-                htmlFor="book-cover" 
+                htmlFor="bookCape" 
                 className="flex flex-col items-center 
                 justify-center border-2 border-dashed
               border-gray-400 rounded-md p-6 w-50 
@@ -104,71 +98,54 @@ export function CreateBook({ onClose, onBookCreated}: CreateBookProps) {
               </label>
 
               <input 
-              id="book-cover"
+              id="bookCape"
               type="file" 
-              accept="image/"
-              onChange={handleImageChange}
-              placeholder="imagem do livro"
+              accept="image/*"
+              {...register("bookCape", {required: false})}
+              
               className="border border-red-500 rounded-md 
-              p-4 focus:border-indigo-500 sr-only"/>
+              p-4 focus:border-indigo-500 sr-only"
+              />
             </div>
 
             <div className="flex flex-col gap-4">
-            <form onSubmit={(e) => handleSave(e)}>
-              
-              <input 
-                placeholder="Nome do livro"
-                name="title"
-                className="border border-red-500 rounded-md 
-                p-4 w-80 focus:border-indigo-500 focus:border"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                />
-
+              <form className="flex flex-col gap-4" 
+              onSubmit={handleSubmit(onSubmit, 
+              (error) => console.log(error))}>
+                
                 <input 
-                placeholder="Autor do livro"
-                name="author"
-                className="border border-red-500 rounded-md 
-                p-4 focus:border-indigo-500 focus:border"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
-                />
+                  placeholder="Nome do livro"
+                  className="border border-red-500 rounded-md 
+                  p-4 w-80 focus:border-indigo-500 focus:border"
+                  {...register("name")}
+                  />
+
+                  <input 
+                  placeholder="Autor do livro"
+                  className="border border-red-500 rounded-md 
+                  p-4 focus:border-indigo-500 focus:border"
+                  {...register("author")}
+                  />
 
 
-                <input 
-                placeholder="Descrição do livro"
-                name="description"
-                className="border border-red-500 rounded-md 
-                p-4 focus:border-indigo-500 focus:border"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                />
+                  <input 
+                  placeholder="Descrição do livro"
+                  className="border border-red-500 rounded-md 
+                  p-4 focus:border-indigo-500 focus:border"
+                  {...register("description")}
+                  />
 
-              <input 
-                type="date"
-                placeholder="Data de lançamento"
-                name="releaseDate"
-                value={releaseDate}
-                onChange={(e) => setReleaseDate(e.target.value)}
-                className="border border-red-500 rounded-md 
-                p-4 w-80 focus:border-indigo-500 focus:border"
-                />
+                  <button
+                  className="mt-6 w-full py-2 bg-blue-600 
+                hover:bg-blue-700 text-white rounded-lg"
+                  type="submit">
+                  Salvar
+                  </button>
 
-          
-
-                <button
-                className="mt-6 w-full py-2 bg-blue-600 
-              hover:bg-blue-700 text-white rounded-lg"
-                type="submit">
-                Salvar
-                </button>
                 </form>
             </div>  
-
         </div>
 
-        
-      
         <button
         className="mt-6 w-full py-2 bg-red-500 
         hover:bg-red-400 text-white rounded-lg"
