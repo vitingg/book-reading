@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { api } from "../../services/api";
 import { AxiosError } from "axios";
 
@@ -30,25 +30,31 @@ export function CreateBook({ onClose, onBookCreated}: CreateBookProps) {
     }
   }
 
-  async function handleSave() {
+  async function handleSave(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
     try {
-      const formData = new FormData()
+      const formData = new FormData(event.currentTarget)
+
 
       formData.append("title", title)
       formData.append("author", author)
       formData.append("description", description)
       formData.append("releaseDate", releaseDate)
 
+
       if(image) {
         formData.append("coverImage", image)
       }
+    
+      const formValues =  Object.fromEntries(formData)
+      
 
-      await api.post("/api", formData, {
+      await api.post("/api", formValues, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
-
+      
       onBookCreated()
       onClose()
       
@@ -108,8 +114,11 @@ export function CreateBook({ onClose, onBookCreated}: CreateBookProps) {
             </div>
 
             <div className="flex flex-col gap-4">
+            <form onSubmit={(e) => handleSave(e)}>
+              
               <input 
                 placeholder="Nome do livro"
+                name="title"
                 className="border border-red-500 rounded-md 
                 p-4 w-80 focus:border-indigo-500 focus:border"
                 value={title}
@@ -118,6 +127,7 @@ export function CreateBook({ onClose, onBookCreated}: CreateBookProps) {
 
                 <input 
                 placeholder="Autor do livro"
+                name="author"
                 className="border border-red-500 rounded-md 
                 p-4 focus:border-indigo-500 focus:border"
                 value={author}
@@ -127,6 +137,7 @@ export function CreateBook({ onClose, onBookCreated}: CreateBookProps) {
 
                 <input 
                 placeholder="Descrição do livro"
+                name="description"
                 className="border border-red-500 rounded-md 
                 p-4 focus:border-indigo-500 focus:border"
                 value={description}
@@ -136,18 +147,22 @@ export function CreateBook({ onClose, onBookCreated}: CreateBookProps) {
               <input 
                 type="date"
                 placeholder="Data de lançamento"
+                name="releaseDate"
                 value={releaseDate}
                 onChange={(e) => setReleaseDate(e.target.value)}
                 className="border border-red-500 rounded-md 
                 p-4 w-80 focus:border-indigo-500 focus:border"
                 />
 
+          
+
                 <button
                 className="mt-6 w-full py-2 bg-blue-600 
               hover:bg-blue-700 text-white rounded-lg"
-                onClick={handleSave}>
+                type="submit">
                 Salvar
                 </button>
+                </form>
             </div>  
 
         </div>

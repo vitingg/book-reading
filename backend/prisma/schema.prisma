@@ -15,13 +15,12 @@ model User {
 }
 
 model Book {
-  id            Int        @id @default(autoincrement())
-  title         String
-  author        String
-  description   String
-  releaseDate   DateTime
-  coverImageUrl String?
-  readers       ReadBook[]
+  id          Int        @id @default(autoincrement())
+  title       String
+  author      String
+  description String
+  releaseDate DateTime
+  readers     ReadBook[]
 }
 
 model ReadBook {

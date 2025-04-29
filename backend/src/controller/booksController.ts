@@ -2,23 +2,25 @@
     import { PrismaClient } from "@prisma/client"
     import { RequestHandler } from "express";
 
+
+
     const prisma = new PrismaClient()
 
     // creating book route
     export const createBook = async (req: Request, res:Response, next:NextFunction) => {
 
         const {title, author, description, releaseData} = req.body
-        console.log("REQUEST BODY:", req.body);
-
+        
         try {
             const book = await prisma.book.create({
                 data: {
                     title,
                     author,
                     description,
-                    releaseDate: new Date(req.body.releaseDate),
+                    releaseDate: new Date(releaseData),
                 }
             })
+            
             res.status(201).json(book)
         } catch (error) {
             next(error)
