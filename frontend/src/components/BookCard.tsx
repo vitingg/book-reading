@@ -1,6 +1,6 @@
-import React from "react";
 
-interface BookProps {
+
+type BookProps = {
   title: string
   author: string
   description: string
@@ -11,23 +11,33 @@ interface BookProps {
   onDelete?: () => void
 }
 
-const BookCard: React.FC<BookProps> = ({
-  title,
-  author,
-  description,
-  releaseDate,
-  coverImageUrl,
-  onAddToProfile,
-  onEdit,
-  onDelete
-}) => {
+export function BookCard({title, author, description, 
+  releaseDate, coverImageUrl, onAddToProfile, 
+  onDelete, onEdit}: BookProps) 
+  {
   return (
-    <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-5 w-full flex flex-row justify-start h-full">
+    <div className="bg-white dark:bg-gray-900 
+    shadow-lg rounded-lg p-5 w-full flex flex-row 
+    justify-between items-center h-full">
+
+
       <div>
-        <h3 className="text-3xl font-semibold text-gray-900 dark:text-white p-2 pb-4 font-rodrigo ">{title}</h3>
-        <p className="text-gray-600 dark:text-gray-300 p-1"><span className="font-medium"> Author: </span> {author}</p>
-        <p className="text-gray-600 dark:text-gray-300 p-1"><span className="font-medium"> Description: </span> {description}</p>
-        <p className="text-gray-600 dark:text-gray-300 p-1 pb-4"><span className="font-medium"> Release Date: </span>{releaseDate}</p>
+        <h3 className="text-3xl font-semibold text-gray-900 
+        dark:text-white p-2 pb-4 font-rodrigo"
+        >{title}</h3>
+
+        <p className="text-gray-600 dark:text-gray-300 p-1">
+          <span className="font-medium"
+        > Author: </span> {author}</p>
+
+        <p className="text-gray-600 dark:text-gray-300 p-1">
+          <span className="font-medium"
+        > Description: </span> {description}</p>
+
+        <p className="text-gray-600 dark:text-gray-300 p-1 pb-4">
+          <span className="font-medium"
+        > Release Date: </span>{releaseDate}</p>
+
         {onAddToProfile && (
           <button
           onClick={onAddToProfile}
@@ -53,10 +63,10 @@ const BookCard: React.FC<BookProps> = ({
       </div>
 
       <div>
-        <img src={coverImageUrl} alt="image doidao" />
+        <img src={coverImageUrl} alt={title} 
+        className="w-40 h-40 object-cover rounded-lg" />
       </div>
     </div>
   )
 }
 
-export {BookCard}

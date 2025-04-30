@@ -3,6 +3,7 @@ import booksRouter from "./routes/booksRoutes"
 import usersRouter from "./routes/usersRoutes"
 import express from "express"
 import cors from "cors"
+import path from "path"
 import 'dotenv/config'
 
 
@@ -18,7 +19,7 @@ app.use("/api", booksRouter)
 app.use("/users", usersRouter)
 
 app.use("/api/read", readBookRouter)
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static(path.resolve(__dirname, "..", "uploads")))
 
 
 app.listen(PORT, () => {

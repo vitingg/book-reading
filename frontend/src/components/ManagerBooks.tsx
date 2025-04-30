@@ -8,6 +8,7 @@ type Book = {
   author: string
   description: string
   releaseDate: string
+  coverImageUrl?: string
 } 
 
 type ManagerBookProps = {
@@ -49,6 +50,7 @@ export function ManagerBooks({refresh}: ManagerBookProps) {
           author={book.author}
           description={book.description}
           releaseDate={book.releaseDate}
+          coverImageUrl={book.coverImageUrl}
           onEdit={() => handleEdit(book.id)}
           onDelete={() => handleDelete(book.id)}
         />

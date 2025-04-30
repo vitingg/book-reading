@@ -1,17 +1,19 @@
 import { Sidebar, SidebarItem } from "../components/Sidebar";
-// import { ManagerBooks } from "../components/ManagerBooks"
-import { CreateBook } from "../components/popups/CreateBook"
+import { ManagerBooks } from "../components/ManagerBooks"
 
+import { CreateBook } from "../components/popups/CreateBook"
+import { DeleteBook } from "../components/popups/DeleteBook";
 
 import { ThemeToggle } from '../components/ToggleTheme';
 import { useState } from "react";
+
 import {
-  Boxes,
+  HomeIcon,
   UserCircle,
   BarChart,
   LayoutDashboard,
 } from "lucide-react";
-import { ManagerBooks } from "../components/ManagerBooks";
+
 
 
 export function DashboardManager() {
@@ -38,7 +40,6 @@ export function DashboardManager() {
               <ThemeToggle />
             </div>
             <ManagerBooks refresh={refreshBooks}/>
-              
           </div>
       </div>
     </div>
@@ -46,7 +47,6 @@ export function DashboardManager() {
 }
 
 // Sidebar do meu Manager
-
 type SidebarProps = {
   setOpenPopup: (value: string | null) => void
   handleBookCreated: () => void
@@ -76,11 +76,6 @@ export function SidebarWork({setOpenPopup, handleBookCreated}: SidebarProps){
         alert />
 
         <SidebarItem 
-        icon={<Boxes size={20} />} 
-        text="Show books"
-        alert />
-
-        <SidebarItem 
         icon={<UserCircle size={20} />} 
         text="Update books" 
         onClick={() => setOpenPopup("update")} 
@@ -92,6 +87,13 @@ export function SidebarWork({setOpenPopup, handleBookCreated}: SidebarProps){
         onClick={() => setOpenPopup("delete")} 
         alert />
 
+        <div className="flex justify-between">
+          <SidebarItem
+          icon={<HomeIcon size={20} />} 
+          text="Back home!"
+          alert />
+        </div>
+        
       </Sidebar>
       
       {openPopupLocal === 'add' && (
@@ -100,8 +102,11 @@ export function SidebarWork({setOpenPopup, handleBookCreated}: SidebarProps){
           onBookCreated={handleBookCreated} 
         />
       )}
-        
-
+      {openPopupLocal === 'delete' && (
+        <DeleteBook 
+          onClose={handleClosePopup} 
+        />
+      )}
     </>
   )
 }
