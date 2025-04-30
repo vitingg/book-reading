@@ -29,7 +29,7 @@ export function ManagerBooks({refresh}: ManagerBookProps) {
 
   async function fetchBooks() {
     try {
-      const response = await api.get("/books")
+      const response = await api.get("/api")
       setBooks(response.data)
     } catch (error) {
       console.log('Erros ao buscar os livros:', error)

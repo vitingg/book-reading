@@ -11,6 +11,7 @@ import {
   BarChart,
   LayoutDashboard,
 } from "lucide-react";
+import { ManagerBooks } from "../components/ManagerBooks";
 
 
 export function DashboardManager() {
@@ -36,7 +37,7 @@ export function DashboardManager() {
               </h1>
               <ThemeToggle />
             </div>
-            
+            <ManagerBooks refresh={refreshBooks}/>
               
           </div>
       </div>
