@@ -5,10 +5,9 @@ import { api } from "../../services/api";
 
 type FormDate = {
   bookCape: FileList
-  name: string
+  title: string
   author: string
   description: string
-  releaseDate: string
 } 
 
 type CreateBookProps = {
@@ -42,7 +41,7 @@ export function CreateBook({ onClose, onBookCreated}: CreateBookProps) {
         const imageFile = date.bookCape[0]
         const formData = new FormData()
 
-        formData.append("file", imageFile)
+        formData.append("image", imageFile)
 
         const uploadResponse = await api.post("/api/upload", formData, {
           headers: { "Content-Type": "multipart/form-data" },
@@ -51,7 +50,7 @@ export function CreateBook({ onClose, onBookCreated}: CreateBookProps) {
       }
 
       await api.post("/api", {
-        name: date.name,
+        title: date.title,
         author: date.author,
         description: date.description,
         coverImageUrl: imageUrl
@@ -117,7 +116,7 @@ export function CreateBook({ onClose, onBookCreated}: CreateBookProps) {
                   placeholder="Nome do livro"
                   className="border border-red-500 rounded-md 
                   p-4 w-80 focus:border-indigo-500 focus:border"
-                  {...register("name")}
+                  {...register("title")}
                   />
 
                   <input 

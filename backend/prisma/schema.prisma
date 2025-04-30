@@ -14,6 +14,11 @@ model User {
   readBooks ReadBook[]
 }
 
+enum Role {
+  MANAGER
+  EMPLOYEE
+}
+
 model Book {
   id            Int        @id @default(autoincrement())
   title         String
@@ -31,9 +36,4 @@ model ReadBook {
   createdAt DateTime @default(now())
   book      Book     @relation(fields: [bookId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
-}
-
-enum Role {
-  MANAGER
-  EMPLOYEE
 }

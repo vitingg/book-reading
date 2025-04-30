@@ -19,13 +19,11 @@
                     coverImageUrl
                 }
             })
-            
             res.status(201).json(book)
         } catch (error) {
             next(error)
             alert("sorry, cant create a book rn!")
         }
-
     }
 
     // show book route 

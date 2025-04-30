@@ -3,7 +3,8 @@
 <h1>Backend</h1>
 
 <p>run: npm i </br>
-npx prisma generate && npx prisma db pull && npx prisma studio && npm run dev
+npx prisma generate && npx prisma db pull && npx prisma studio </br>
+npm run dev
 </p>
 
 <h1>Frontend</h1>
