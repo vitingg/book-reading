@@ -77,6 +77,7 @@
         }
     }
 
+    // image book cape
     export const uploadImage: RequestHandler = (req: Request, res:Response) => {
         if (!req.file) {
         res.status(400).json({ message: "No file uploaded" });

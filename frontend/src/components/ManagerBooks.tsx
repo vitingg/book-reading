@@ -8,7 +8,7 @@ type Book = {
   author: string
   description: string
   releaseDate: string
-}
+} 
 
 type ManagerBookProps = {
   refresh: boolean
