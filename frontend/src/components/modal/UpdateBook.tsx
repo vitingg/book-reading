@@ -1,10 +1,11 @@
-import { api } from "../../services/api";
-
 type CreateBookProps = {
   onClose: () => void;
+  onUpdate: () => void;
 }
 
-export function DeleteBook({ onClose }: CreateBookProps) {
+export function UpdateBook({ onClose }: CreateBookProps) {
+
+
   return (
     <div className="fixed inset-0 flex 
     items-center justify-center z-50">
@@ -17,10 +18,8 @@ export function DeleteBook({ onClose }: CreateBookProps) {
 
         <h2 className="text-2xl font-bold mb-6 text-center
         text-gray-900 dark:text-gray-100">
-          Deletar Livro
+          Atualizar livros
         </h2>
-
-        
       
         <button
         className="mt-6 w-full py-2 bg-blue-600 

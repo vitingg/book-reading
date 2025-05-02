@@ -1,8 +1,9 @@
 import { Sidebar, SidebarItem } from "../components/Sidebar";
 import { ManagerBooks } from "../components/ManagerBooks"
 
-import { CreateBook } from "../components/popups/CreateBook"
-import { DeleteBook } from "../components/popups/DeleteBook";
+import { CreateBook } from "../components/modal/CreateBook"
+import { UpdateBook } from "../components/modal/UpdateBook";
+import { DeleteBook } from "../components/modal/DeleteBook";
 
 import { ThemeToggle } from '../components/ToggleTheme';
 import { useState } from "react";
@@ -25,12 +26,26 @@ export function DashboardManager() {
     setOpenPopup(null)
   }
 
+  function handleBookDeleted(){
+    setRefreshBooks(prev => !prev)
+    setOpenPopup(null)
+  }
+
+  function handleBookUpdated(){
+    setRefreshBooks(prev => !prev)
+    setOpenPopup(null)
+  }
+
 
   return (
     <div className="relative z-10 flex h-screen bg-gray-100 
     text-gray-800 dark:bg-gray-900 dark:text-white gap-2" >
       <SidebarWork setOpenPopup={setOpenPopup}
-      handleBookCreated={handleBookCreated}/>
+        handleBookCreated={handleBookCreated}
+        handleBookDeleted={handleBookDeleted}
+        handleBookUpdated={handleBookUpdated}
+      />
+
       <div className="flex-1 p-6 overflow-auto">
           <div className="bg-white mt-4 dark:bg-gray-800 p-6 rounded-2xl shadow-md">
             <div className="flex justify-between items-center mb-2">
@@ -50,9 +65,11 @@ export function DashboardManager() {
 type SidebarProps = {
   setOpenPopup: (value: string | null) => void
   handleBookCreated: () => void
+  handleBookDeleted: () => void
+  handleBookUpdated: () => void
 }
 
-export function SidebarWork({setOpenPopup, handleBookCreated}: SidebarProps){
+export function SidebarWork({setOpenPopup, handleBookCreated, handleBookDeleted, handleBookUpdated}: SidebarProps){
   const [openPopupLocal, setOpenPopupLocal] = useState<string | null>(null)
 
   function handleOpenPopup(popupType: string){
@@ -64,6 +81,7 @@ export function SidebarWork({setOpenPopup, handleBookCreated}: SidebarProps){
     setOpenPopup(null)
     setOpenPopupLocal(null)
   }
+
 
   return (
     <>
@@ -78,13 +96,13 @@ export function SidebarWork({setOpenPopup, handleBookCreated}: SidebarProps){
         <SidebarItem 
         icon={<UserCircle size={20} />} 
         text="Update books" 
-        onClick={() => setOpenPopup("update")} 
+        onClick={() => handleOpenPopup("update")} 
         alert />
 
         <SidebarItem 
         icon={<BarChart size={20} />} 
         text="Delete books" 
-        onClick={() => setOpenPopup("delete")} 
+        onClick={() => handleOpenPopup("delete")} 
         alert />
 
         <div className="flex justify-between">
@@ -104,7 +122,14 @@ export function SidebarWork({setOpenPopup, handleBookCreated}: SidebarProps){
       )}
       {openPopupLocal === 'delete' && (
         <DeleteBook 
-          onClose={handleClosePopup} 
+          onClose={handleClosePopup}
+          onDelete={handleBookDeleted}
+        />
+      )}
+        {openPopupLocal === 'update' && (
+        <UpdateBook
+          onClose={handleClosePopup}
+          onUpdate={handleBookUpdated}
         />
       )}
     </>

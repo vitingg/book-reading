@@ -9,12 +9,10 @@ type FormDate = {
   author: string
   description: string
 } 
-
 type CreateBookProps = {
   onClose: () => void;
   onBookCreated: () => void
 }
-
 
 export function CreateBook({ onClose, onBookCreated}: CreateBookProps) {
   const [preview, setPreview] = useState<string | null>(null)

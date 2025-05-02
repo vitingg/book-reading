@@ -1,8 +1,13 @@
-type CreateBookProps = {
+
+
+type DeleteBookProps = {
   onClose: () => void;
+  onDelete: () => void
 }
 
-export function UpdateBook({ onClose }: CreateBookProps) {
+export function DeleteBook({ onClose }: DeleteBookProps) {
+  
+
   return (
     <div className="fixed inset-0 flex 
     items-center justify-center z-50">
@@ -15,7 +20,7 @@ export function UpdateBook({ onClose }: CreateBookProps) {
 
         <h2 className="text-2xl font-bold mb-6 text-center
         text-gray-900 dark:text-gray-100">
-          Atualizar livros
+          Deletar Livro
         </h2>
 
         

@@ -24,7 +24,8 @@ export function DashboardClient() {
               </h1>
               <ThemeToggle />
             </div>
-              <ManagerBooks />
+              <ManagerBooks refresh={false}
+             />
           </div>
       </div>
     </div>
