@@ -1,23 +1,32 @@
 import { Router } from "express";
-import { createBook, deleteBook, getAllBooks, updateBook, uploadImage } from "../controller/booksController" 
 import { upload } from "src/middlewares/upload";
+import {
+  createBook,
+  deleteBook,
+  getAllBooks,
+  updateBook,
+  uploadImage,
+  getOneBook,
+} from "../controller/booksController";
 
-
-const router = Router()
+const router = Router();
 
 // creating books route
-router.post("/", createBook)
+router.post("/", createBook);
 
-// book image route 
-router.post("/upload", upload.single("image"), uploadImage)
+// book image route
+router.post("/upload", upload.single("image"), uploadImage);
 
 // listing book route
-router.get("/", getAllBooks)
+router.get("/", getAllBooks);
+
+// listing one book route
+router.get("/:id", getOneBook);
 
 // updating book route
-router.put("/:title", updateBook)
+router.put("/:id", updateBook);
 
 // deleting book route
-router.delete("/:title", deleteBook)
+router.delete("/:id", deleteBook);
 
-export default router
+export default router;

@@ -39,19 +39,35 @@
         }
     } 
 
+    // show one book route
+    export const getOneBook = async (req: Request, res:Response, next:NextFunction) => {
+    try {
+        const books = await prisma.book.findUnique(
+            {
+                where: {
+                    id: Number(req.params.id)
+                }
+            }
+        )
+        res.status(200).json(books)
+    } catch (error) {
+        console.log(error)
+    }
+    }
+
     // update book route
     export const updateBook = async (req: Request, res:Response, next:NextFunction) => {
-        const { title } = req.body
-        const { author, description, releaseDate} = req.body
+        const { id } = req.params
+        const { title, author, description} = req.body
 
 
         try {
-            const update = await prisma.book.updateMany({
-                where: {title},
+            const update = await prisma.book.update({
+                where: { id: Number(id) },
                 data: {
+                    title,
                     author,
                     description,
-                    releaseDate: new Date(req.body.releaseDate)
                 }
             })
             res.status(200).json({ message: "book updated successfully" });
@@ -63,11 +79,11 @@
 
     // delete book route
     export const deleteBook = async (req: Request, res:Response, next:NextFunction) => {
-        const { title } = req.params
+        const { id } = req.params
 
         try {
-            const deleted = await prisma.book.deleteMany({
-                where: {title}
+            const deleted = await prisma.book.delete({
+                where: { id: Number(id) }
             })
             
             res.status(200).json({ message: "deleted successfully"})

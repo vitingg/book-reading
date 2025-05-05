@@ -1,48 +1,52 @@
-import { createContext, useContext, useState, ReactNode } from 'react'
-import { ArrowRightToLine, ArrowLeftToLine, MoreVertical } from 'lucide-react'
-import logo from "../assets/logo.png"
-import johndoe from "../assets/johndoe.jpeg"
+import { createContext, useContext, useState, ReactNode } from "react";
+import { ArrowRightToLine, ArrowLeftToLine, MoreVertical } from "lucide-react";
+import logo from "../assets/logo.png";
+import johndoe from "../assets/johndoe.jpeg";
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
 type SidebarContextType = {
-  expanded: boolean
-}
+  expanded: boolean;
+};
 
 type SidebarItemProps = {
-  icon: ReactNode
-  text: string
-  active?: boolean
-  alert?: boolean
-  onClick?: () => void
-}
-
+  icon: ReactNode;
+  text: string;
+  active?: boolean;
+  alert?: boolean;
+  onClick?: () => void;
+};
 
 type SidebarProps = {
   children: ReactNode;
-}
+};
 
 export function Sidebar({ children }: SidebarProps) {
-  const user = JSON.parse(localStorage.getItem('user') || '{}')
-  const userName = user.name
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const userName = user.name;
 
   const [expanded, setExpanded] = useState(false);
 
   return (
     <aside className="h-full">
-      <nav className="h-full flex flex-col bg-gray-100 border-r shadow-sm text-black 
-      dark:bg-gray-700 dark:text-white dark:border-gray-100">
+      <nav
+        className="h-full flex flex-col bg-gray-100 border-r shadow-sm text-black 
+      dark:bg-gray-700 dark:text-white dark:border-gray-100"
+      >
         <div className="p-4 pb-2 flex justify-between items-center">
           <img
             src={logo}
             alt=""
             className={`overflow-hidden transition-all 
-            ${expanded ? 'w-32' : 'w-0'}
+            ${expanded ? "w-32" : "w-0"}
             `}
           />
           <>
-            <button onClick={() => setExpanded((curr) => !curr)} className="p-1.5 
-            rounded-md">
+            <button
+              onClick={() => setExpanded((curr) => !curr)}
+              className="p-1.5 
+            rounded-md"
+            >
               {expanded ? <ArrowLeftToLine /> : <ArrowRightToLine />}
             </button>
           </>
@@ -58,11 +62,13 @@ export function Sidebar({ children }: SidebarProps) {
           <div
             className={`flex justify-between items-center 
             overflow-hidden transition-all 
-            ${expanded ? 'w-52 ml-3' : 'w-0'} `}
+            ${expanded ? "w-52 ml-3" : "w-0"} `}
           >
             <div className="leading-4">
               <h4 className="font-semibold">{userName}</h4>
-              <span className="text-xs text-gray-600 dark:text-gray-100">{userName}@gmail.com</span>
+              <span className="text-xs text-gray-600 dark:text-gray-100">
+                {userName}@gmail.com
+              </span>
             </div>
             <MoreVertical />
           </div>
@@ -72,12 +78,16 @@ export function Sidebar({ children }: SidebarProps) {
   );
 }
 
-
-export function SidebarItem({ icon, text, active = false, alert = false, onClick }: SidebarItemProps) {
+export function SidebarItem({
+  icon,
+  text,
+  active = false,
+  alert = false,
+  onClick,
+}: SidebarItemProps) {
   const context = useContext(SidebarContext);
 
-  
-  if (!context) throw new Error('SidebarItem must be used within a Sidebar');
+  if (!context) throw new Error("SidebarItem must be used within a Sidebar");
 
   const { expanded } = context;
 
@@ -90,15 +100,15 @@ export function SidebarItem({ icon, text, active = false, alert = false, onClick
         transition-colors 
         ${
           active
-            ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-900'
-            : 'hover:bg-indigo-50 text-gray-600 dark:text-gray-100 '
+            ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-900"
+            : "hover:bg-indigo-50 text-gray-600 dark:text-gray-100 "
         }
       `}
     >
       {icon}
       <span
         className={`overflow-hidden transition-all 
-        ${expanded ? 'w-52 ml-3' : 'w-0'}`}
+        ${expanded ? "w-52 ml-3" : "w-0"}`}
       >
         {text}
       </span>
@@ -107,7 +117,7 @@ export function SidebarItem({ icon, text, active = false, alert = false, onClick
         <div
           className={`absolute right-2 w-2 h-2 
         rounded bg-indigo-400 
-        ${expanded ? '' : 'top-2'}`}
+        ${expanded ? "" : "top-2"}`}
         />
       )}
 
