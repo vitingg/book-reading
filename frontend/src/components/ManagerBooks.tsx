@@ -13,18 +13,11 @@ type Book = {
 
 type ManagerBookProps = {
   refresh: boolean;
+  showId: boolean
 };
 
-export function ManagerBooks({ refresh }: ManagerBookProps) {
+export function ManagerBooks({ refresh, showId }: ManagerBookProps) {
   const [books, setBooks] = useState<Book[]>([]);
-
-  const handleEdit = (bookId: number) => {
-    console.log("Edit book", bookId);
-  };
-
-  const handleDelete = (bookId: number) => {
-    console.log("Delete book", bookId);
-  };
 
   async function fetchBooks() {
     try {
@@ -50,8 +43,7 @@ export function ManagerBooks({ refresh }: ManagerBookProps) {
           description={book.description}
           releaseDate={new Date(book.releaseDate).toLocaleDateString("pt-BR")}
           coverImageUrl={book.coverImageUrl}
-          onEdit={() => handleEdit(book.id)}
-          onDelete={() => handleDelete(book.id)}
+          showId={showId}
         />
       ))}
     </div>

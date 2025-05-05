@@ -19,7 +19,7 @@ export function DashboardClient() {
               </h1>
               <ThemeToggle />
             </div>
-            <ManagerBooks refresh={false} />
+            <ManagerBooks refresh={false} showId={false}/>
           </div>
         </div>
       </div>

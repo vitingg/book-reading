@@ -11,7 +11,7 @@ import { useState } from "react";
 import { BookUp2, Trash2, BookPlus } from "lucide-react";
 
 export function DashboardManager() {
-  const [openPopup, setOpenPopup] = useState<string | null>(null);
+  const [_, setOpenPopup] = useState<string | null>(null);
   const [refreshBooks, setRefreshBooks] = useState(false);
 
   function handleBookCreated() {
@@ -49,7 +49,7 @@ export function DashboardManager() {
             </h1>
             <ThemeToggle />
           </div>
-          <ManagerBooks refresh={refreshBooks} />
+          <ManagerBooks refresh={refreshBooks} showId={true} />
         </div>
       </div>
     </div>

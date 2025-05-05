@@ -32,7 +32,6 @@ export const markBookAsRead = async (req: Request, res:Response, next:NextFuncti
     }
 }
 
- 
 export const getAllReadBooks = async (req: Request, res:Response, next:NextFunction) => {
     try {
         const reads = await prisma.readBook.findMany({
