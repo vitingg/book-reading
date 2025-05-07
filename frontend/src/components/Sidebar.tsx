@@ -2,6 +2,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 import { ArrowRightToLine, ArrowLeftToLine, MoreVertical } from "lucide-react";
 import logo from "../assets/logo.png";
 import johndoe from "../assets/johndoe.jpeg";
+import { DropdownMenu } from "./DropdownMenu";
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
@@ -26,6 +27,7 @@ export function Sidebar({ children }: SidebarProps) {
   const userName = user.name;
 
   const [expanded, setExpanded] = useState(false);
+  const [openSettings, setOpenSettigs] = useState(false)
 
   return (
     <aside className="h-full">
@@ -70,7 +72,19 @@ export function Sidebar({ children }: SidebarProps) {
                 {userName}@gmail.com
               </span>
             </div>
-            <MoreVertical />
+            {
+              openSettings && (
+                expanded? 
+                <DropdownMenu />
+                : 
+                true
+              )
+            }
+            <div>
+              <button className="cursor-pointer" onClick={()=> setOpenSettigs((prev) => !prev)}>
+                <MoreVertical />
+              </button>
+            </div>
           </div>
         </div>
       </nav>

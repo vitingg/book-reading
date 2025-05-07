@@ -28,7 +28,7 @@ export function BookCard({
       <div className="w-250">
         <h3
           className="text-3xl font-semibold text-gray-900 
-        dark:text-white p-2 pb-4 font-rodrigo"
+        dark:text-white p-2 pb-4"
         >
           {title}
         </h3>
