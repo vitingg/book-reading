@@ -5,6 +5,7 @@ import { NotFound } from "../pages/404";
 import { DashboardClient } from "../pages/DashboardClient";
 import { DashboardManager } from "../pages/DashboardManager";
 
+
 export function AuthRoutes() {
   return (
     <Routes>

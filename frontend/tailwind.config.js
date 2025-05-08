@@ -1,36 +1,30 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class',
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  darkMode: "class",
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
-        rodrigo: ['Inter', 'sans-serif'],
+        rodrigo: ["Inter", "sans-serif"],
       },
-      backgroundColor: {
-      },
-      colors: {
-        
-      },
+      backgroundColor: {},
+      colors: {},
       keyframes: {
         growFadeIn: {
-          '0%': {
-            opacity: '0',
-            width: '0',
+          "0%": {
+            opacity: "0",
+            width: "0",
           },
-          '100%': {
-            opacity: '1',
-            width: '18.75rem',
+          "100%": {
+            opacity: "1",
+            width: "18.75rem",
           },
         },
       },
       animation: {
-        growFadeIn: 'growFadeIn 0.5s ease-out forwards',
+        growFadeIn: "growFadeIn 0.5s ease-out forwards",
       },
     },
   },
-  plugins: [],
-}
+  plugins: [require("tailwind-scrollbar-hide")],
+};
