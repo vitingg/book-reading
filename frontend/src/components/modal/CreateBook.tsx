@@ -19,6 +19,7 @@ export function CreateBook({ onClose, onBookCreated }: CreateBookProps) {
   const { register, handleSubmit, watch, reset } = useForm<FormDate>();
   const selectedImage = watch("bookCape");
 
+  // Use effect pra ficar observando a capa do livro
   useEffect(() => {
     if (selectedImage && selectedImage.length > 0) {
       const file = selectedImage[0];
