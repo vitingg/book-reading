@@ -1,9 +1,10 @@
-import { Sidebar, SidebarItem } from "../components/Sidebar";
-import { ThemeToggle } from "../components/ToggleTheme";
-import { ManagerBooks } from "../components/ManagerBooks";
-import { UserRoundPen, UserCircle, BarChart } from "lucide-react";
-import { useState } from "react";
 import { UserProfile } from "../components/client modal/UserProfile";
+import { Sidebar, SidebarItem } from "../components/Sidebar";
+import { Ranking } from "../components/client modal/Ranking";
+import { ManagerBooks } from "../components/ManagerBooks";
+import { ThemeToggle } from "../components/ToggleTheme";
+import { UserRoundPen, UserCircle } from "lucide-react";
+import { useState } from "react";
 
 export function DashboardClient() {
   const [, setOpenPopup] = useState<string | null>(null);
@@ -82,6 +83,7 @@ export function SidebarWork({
         <SidebarItem
           icon={<UserCircle size={20} />}
           text="See book rank"
+          onClick={() => handleOpenPopup("rank")}
           alert
         />
       </Sidebar>
@@ -93,6 +95,12 @@ export function SidebarWork({
         />
       )}
 
+      {openPopupLocal === "rank" && (
+        <Ranking
+          onClose={handleClosePopup}
+          onOpenProfile={handleOpenProfile}
+        />
+      )}
     </>
   );
 }

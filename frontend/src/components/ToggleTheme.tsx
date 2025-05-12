@@ -34,7 +34,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:scale-105 transition"
+      className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:scale-125 transition"
       title="Toggle theme"
     >
       {isDark ? (
