@@ -38,7 +38,7 @@ export function DashboardClient() {
               </h1>
               <ThemeToggle />
             </div>
-            <ManagerBooks refresh={false} showId={false} />
+            <ManagerBooks refresh={false} showId={false} userRole="EMPLOYEE" />
           </div>
         </div>
       </div>

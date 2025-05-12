@@ -1,8 +1,8 @@
 import { Sidebar, SidebarItem } from "../components/Sidebar";
 import { ManagerBooks } from "../components/ManagerBooks";
-import { CreateBook } from "../components/modal/CreateBook";
-import { UpdateBook } from "../components/modal/UpdateBook";
-import { DeleteBook } from "../components/modal/DeleteBook";
+import { CreateBook } from "../components/manager modal/CreateBook";
+import { UpdateBook } from "../components/manager modal/UpdateBook";
+import { DeleteBook } from "../components/manager modal/DeleteBook";
 import { ThemeToggle } from "../components/ToggleTheme";
 import { useState } from "react";
 import { BookUp2, Trash2, BookPlus } from "lucide-react";
@@ -46,7 +46,7 @@ export function DashboardManager() {
             </h1>
             <ThemeToggle />
           </div>
-          <ManagerBooks refresh={refreshBooks} showId={true} />
+          <ManagerBooks refresh={refreshBooks} showId={true} userRole="MANAGER" />
         </div>
       </div>
     </div>

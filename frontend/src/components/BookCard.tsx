@@ -54,7 +54,7 @@ export function BookCard({
         {onAddToProfile && (
           <button
             onClick={onAddToProfile}
-            className="mt-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark"
+            className="mt-2 px-4 py-2 border border-gray-600 p-4 "
           >
             Marcar como lido!
           </button>
