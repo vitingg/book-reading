@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { ArrowRightToLine, ArrowLeftToLine, MoreVertical } from "lucide-react";
 import logo from "../assets/logo.png";
-import johndoe from "../assets/johndoe.jpeg";
+import noPhoto from "../assets/noPhoto.png"
 import { DropdownMenu } from "./DropdownMenu";
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
@@ -59,7 +59,7 @@ export function Sidebar({ children }: SidebarProps) {
         </SidebarContext.Provider>
 
         <div className="border-t flex p-3">
-          <img src={johndoe} alt="" className="w-10 h-10 rounded-md" />
+          <img src={noPhoto} alt="" className="w-10 h-10 rounded-md" />
 
           <div
             className={`flex justify-between items-center 

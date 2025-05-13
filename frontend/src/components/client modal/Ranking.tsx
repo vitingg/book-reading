@@ -1,13 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import newLogo from "../../assets/Captura_de_tela_2025-05-12_152638-removebg-preview.png";
+import { api } from "../../services/api";
+import { X } from "lucide-react";
 
-const mockData = [
-  { name: "Julian", booksRead: 12, maxBooks: 12 },
-  { name: "Adrian", booksRead: 10, maxBooks: 12 },
-  { name: "Peralta", booksRead: 8, maxBooks: 12 },
-  { name: "Raymond", booksRead: 6, maxBooks: 12 },
-  { name: "Charles", booksRead: 5, maxBooks: 12 },
-];
+type UserRanking = {
+  name: string;
+  booksRead: number;
+};
 
 type onRankingProps = {
   onClose: () => void;
@@ -15,16 +14,40 @@ type onRankingProps = {
 };
 
 export function Ranking({ onClose, onOpenProfile }: onRankingProps) {
+  const [rankingData, setRankingData] = useState<UserRanking[]>([]);
+  const maxBooks = Math.max(...rankingData.map((u) => u.booksRead), 1);
+
   useEffect(() => {
     onOpenProfile();
+
+    const fetchRanking = async () => {
+      try {
+        const response = await api.get(
+          "http://localhost:3000/api/read/ranking"
+        ); // ajuste a URL se necessário
+        setRankingData(response.data);
+      } catch (err) {
+        console.error("Erro ao buscar ranking:", err);
+      }
+    };
+
+    fetchRanking();
   }, []);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="absolute inset-0 backdrop-blur-md"></div>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
       <div className="z-20 flex items-center justify-center h-screen w-full flex-col">
-        <div className="border bg-gray-200 dark:bg-gray-800 w-1/2 h-3/4 rounded-xl shadow-lg">
+        <div className="bg-gray-200 dark:bg-gray-800 w-1/2 h-3/4 rounded-xl shadow-lg">
           <div className="flex justify-around items-center">
+            {/* Botão pra fechar o modal */}
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-red-500 hover:text-red-700 transition"
+              aria-label="Fechar perfil"
+            >
+              <X size={30} />
+            </button>
+
             <h1 className="font-semibold text-4xl text-black dark:text-white mt-4 text-center">
               Ranking atual!
             </h1>
@@ -32,8 +55,9 @@ export function Ranking({ onClose, onOpenProfile }: onRankingProps) {
           </div>
 
           <div className="mt-6 ml-16 mr-16 mb-6 space-y-1">
-            {mockData.map((user, index) => {
-              const progress = (user.booksRead / user.maxBooks) * 100;
+            {/* Calculo da barra */}
+            {rankingData.map((user, index) => {
+              const progress = (user.booksRead / maxBooks) * 100;
               return (
                 <div
                   key={index}
@@ -63,12 +87,6 @@ export function Ranking({ onClose, onOpenProfile }: onRankingProps) {
             })}
           </div>
         </div>
-        <button
-          className="text-2xl mt-2 text-red-500 font-medium border p-3 rounded-xl bg-gray-200 dark:bg-gray-800 cursor-pointer hover:opacity-40"
-          onClick={() => onClose()}
-        >
-          Clique aqui para fechar!
-        </button>
       </div>
     </div>
   );

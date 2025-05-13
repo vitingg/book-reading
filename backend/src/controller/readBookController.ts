@@ -17,6 +17,7 @@ export const markBookAsRead = async (req: Request, res:Response, next:NextFuncti
 
         if(existingBook){
             res.status(400).json({message: "already exists user who`s marked as read this book"})
+            return
         }
 
         const readBook = await prisma.readBook.create({
@@ -90,8 +91,8 @@ export const getReadingRanking = async (req: Request, res:Response, next:NextFun
         const ranked = ranking.map(user => ({
             userId: user.id,
             name: user.name,
-            totalRead: user.readBooks.length,
-        })).sort((a, b) => b.totalRead - a.totalRead)
+            booksRead: user.readBooks.length,
+        })).sort((a, b) => b.booksRead - a.booksRead)
 
         res.status(200).json(ranked)
 

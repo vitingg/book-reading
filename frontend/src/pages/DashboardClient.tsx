@@ -57,7 +57,6 @@ type SidebarProps = {
 export function SidebarWork({
   setOpenPopup,
   handleOpenProfile,
-  handleOpenRanking,
 }: SidebarProps) {
   const [openPopupLocal, setOpenPopupLocal] = useState<string | null>(null);
 
