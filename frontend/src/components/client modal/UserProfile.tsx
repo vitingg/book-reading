@@ -60,7 +60,7 @@ export function UserProfile({ onClose, onOpenProfile }: OpenProfileProps) {
       {/* Botão pra fechar o modal */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 text-red-500 hover:text-red-700 transition"
+        className="absolute top-8 right-8 text-red-500 hover:text-red-700 transition"
         aria-label="Fechar perfil"
       >
         <X size={30} />

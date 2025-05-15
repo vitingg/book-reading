@@ -24,7 +24,7 @@ export function Ranking({ onClose, onOpenProfile }: onRankingProps) {
       try {
         const response = await api.get(
           "http://localhost:3000/api/read/ranking"
-        ); // ajuste a URL se necessário
+        );
         setRankingData(response.data);
       } catch (err) {
         console.error("Erro ao buscar ranking:", err);
@@ -42,7 +42,7 @@ export function Ranking({ onClose, onOpenProfile }: onRankingProps) {
             {/* Botão pra fechar o modal */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 text-red-500 hover:text-red-700 transition"
+              className="absolute top-8 right-8 text-red-500 hover:text-red-700 transition"
               aria-label="Fechar perfil"
             >
               <X size={30} />
@@ -54,9 +54,9 @@ export function Ranking({ onClose, onOpenProfile }: onRankingProps) {
             <img src={newLogo} className="mt-4 w-20 h-20" alt="" />
           </div>
 
-          <div className="mt-6 ml-16 mr-16 mb-6 space-y-1">
+          <div className="mt-6 ml-8 mr-8 mb-6 space-y-1">
             {/* Calculo da barra */}
-            {rankingData.map((user, index) => {
+            {rankingData.slice(0, 5).map((user, index) => {
               const progress = (user.booksRead / maxBooks) * 100;
               return (
                 <div
@@ -65,10 +65,10 @@ export function Ranking({ onClose, onOpenProfile }: onRankingProps) {
                 >
                   <div className="w-full">
                     <div className="flex items-center gap-2 text-md font-medium">
-                      <span className="ml-4 text-black dark:text-white">
+                      <span className="ml-4 text-2xl mt-4 text-black dark:text-white">
                         {index + 1}º
                       </span>
-                      <span className="text-black dark:text-white">
+                      <span className="text-black text-2xl mt-4 dark:text-white">
                         {user.name}
                       </span>
                     </div>
@@ -78,7 +78,7 @@ export function Ranking({ onClose, onOpenProfile }: onRankingProps) {
                         style={{ width: `${progress}%` }}
                       ></div>
                     </div>
-                    <span className="m-2 text-md font-bold text-gray-700 dark:text-cyan-300">
+                    <span className="m-2 text-xl text-md font-bold text-gray-700 dark:text-cyan-300">
                       Total de livros lidos: {user.booksRead}
                     </span>
                   </div>
