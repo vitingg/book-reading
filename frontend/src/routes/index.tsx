@@ -1,4 +1,4 @@
-import { AuthRoutes } from "./authRoutes";
+import { AuthRoutes } from "./auth-routes";
 import { BrowserRouter } from "react-router";
 
 export function Routes() {

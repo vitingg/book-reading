@@ -1,8 +1,8 @@
-import { UserProfile } from "../components/client modal/UserProfile";
-import { Sidebar, SidebarItem } from "../components/Sidebar";
-import { Ranking } from "../components/client modal/Ranking";
-import { ManagerBooks } from "../components/ManagerBooks";
-import { ThemeToggle } from "../components/ToggleTheme";
+import { UserProfile } from "../components/client modal/user-profile";
+import { Sidebar, SidebarItem } from "../components/siderbar";
+import { Ranking } from "../components/client modal/ranking";
+import { ManagerBooks } from "../components/books";
+import { ThemeToggle } from "../components/toggle-themes";
 import { UserRoundPen, UserCircle } from "lucide-react";
 import { useState } from "react";
 
@@ -54,10 +54,7 @@ type SidebarProps = {
   handleOpenRanking: () => void;
 };
 
-export function SidebarWork({
-  setOpenPopup,
-  handleOpenProfile,
-}: SidebarProps) {
+export function SidebarWork({ setOpenPopup, handleOpenProfile }: SidebarProps) {
   const [openPopupLocal, setOpenPopupLocal] = useState<string | null>(null);
 
   function handleOpenPopup(popupType: string) {
@@ -95,10 +92,7 @@ export function SidebarWork({
       )}
 
       {openPopupLocal === "rank" && (
-        <Ranking
-          onClose={handleClosePopup}
-          onOpenProfile={handleOpenProfile}
-        />
+        <Ranking onClose={handleClosePopup} onOpenProfile={handleOpenProfile} />
       )}
     </>
   );

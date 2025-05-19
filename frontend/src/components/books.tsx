@@ -1,4 +1,4 @@
-import { BookCard } from "./BookCard";
+import { BookCard } from "./book-card";
 import { useEffect, useState } from "react";
 import { api } from "../services/api";
 

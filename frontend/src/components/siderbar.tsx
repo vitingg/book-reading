@@ -2,7 +2,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 import { ArrowRightToLine, ArrowLeftToLine, MoreVertical } from "lucide-react";
 import logo from "../assets/logo.png";
 import noPhoto from "../assets/noPhoto.png"
-import { DropdownMenu } from "./DropdownMenu";
+import { DropdownMenu } from "./dropdown-menu";
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
