@@ -41,9 +41,9 @@ export function SingIn() {
                 localStorage.setItem("user", JSON.stringify(user));
 
                 if (user.role === "MANAGER") {
-                  navigate("/manager");
+                  navigate("/dashboard/admin");
                 } else if (user.role === "EMPLOYEE") {
-                  navigate("client");
+                  navigate("/dashboard/client");
                 } else {
                   alert("Usuário não encontrado");
                 }
@@ -56,7 +56,7 @@ export function SingIn() {
 
           <h1 className="mt-4 text-xl">
             Ainda não possui uma conta?{" "}
-            <a href="/signup" className="text-blue-300">
+            <a href="/auth/signup" className="text-blue-300">
               Criar
             </a>
           </h1>

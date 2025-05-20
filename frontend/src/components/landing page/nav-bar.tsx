@@ -9,17 +9,21 @@ export function Navbar() {
         <img src={logo} alt="" className="w-30 h-20 cursor-pointer" />
         <ul className="flex flex-row text-xl items-center gap-4">
           <li className="">
-            <div className="flex flex-row items-center justify-center gap-2 cursor-pointer border border-none p-3 rounded-xl text-black bg-white">
-              <UserRoundPlus />
-            <a href="/auth/singup" className="font-medium">Criar conta</a>
-            </div>
+            <a href="/auth/signup">
+              <div className="flex flex-row items-center justify-center gap-2 cursor-pointer border border-none p-3 rounded-xl text-black bg-white">
+                <UserRoundPlus />
+                <h1 className="font-medium">Criar conta</h1>
+              </div>
+            </a>
           </li>
 
           <li className="">
-            <div className="flex flex-row items-center justify-center gap-2 cursor-pointer border border-none p-3 rounded-xl bg-blue-600 text-white">
-              <LogIn />
-            <a href="/auth/login" className="font-medium">Entrar</a>
-            </div>
+            <a href="/auth/login" className="font-medium">
+              <div className="flex flex-row items-center justify-center gap-2 cursor-pointer border border-none p-3 rounded-xl bg-blue-600 text-white">
+                <LogIn />
+                <h1 className="font-medium">Entrar</h1>
+              </div>
+            </a>
           </li>
         </ul>
       </nav>

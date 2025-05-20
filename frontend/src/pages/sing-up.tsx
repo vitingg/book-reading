@@ -2,7 +2,7 @@ import { Form } from "../components/form";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 
-export function SingUp() {
+export function Signup() {
   const navigate = useNavigate();
   return (
     // Define a imagem de fundo
@@ -32,9 +32,9 @@ export function SingUp() {
                 localStorage.setItem("user", JSON.stringify(user));
 
                 if (user.role === "MANAGER") {
-                  navigate("/manager");
+                  navigate("/dashboard/admin");
                 } else if (user.role === "EMPLOYEE") {
-                  navigate("/client");
+                  navigate("/dashboard/client");
                 } else {
                   alert("Usuário não encontrado");
                 }
@@ -46,7 +46,7 @@ export function SingUp() {
           />
           <h1 className="mt-4 text-xl">
             Já possui uma conta?{" "}
-            <a href="/" className="text-blue-300">
+            <a href="/auth/login" className="text-blue-300">
               Entrar
             </a>
           </h1>
