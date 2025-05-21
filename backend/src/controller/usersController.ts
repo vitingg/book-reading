@@ -2,14 +2,22 @@ import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { z } from "zod";
 
 const prisma = new PrismaClient();
+
+export const createUserSchema = z.object({
+  name: z.string().min(3),
+  password: z.string().min(4),
+  role: z.enum(["MANAGER", "EMPLOYEE"]),
+});
 
 export const createUser = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
+  
   const { name, password, role } = req.body;
 
   const hashadedPassword = await bcrypt.hash(password, 10);
@@ -54,7 +62,9 @@ export const login = async (req: Request, res: Response) => {
     { id: user.id, role: user.role },
     process.env.JWT_SECRET as string
   );
-  res.status(200).json({ token, user: { id: user.id, name: user.name, role: user.role } });
+  res
+    .status(200)
+    .json({ token, user: { id: user.id, name: user.name, role: user.role } });
 };
 
 export const getAllUser = async (

@@ -31,12 +31,15 @@ export function Signup() {
                 localStorage.setItem("token", token);
                 localStorage.setItem("user", JSON.stringify(user));
 
+                if (!token || !user) {
+                  alert("Usuário não encontrado");
+                  return;
+                }
+
                 if (user.role === "MANAGER") {
                   navigate("/dashboard/admin");
                 } else if (user.role === "EMPLOYEE") {
                   navigate("/dashboard/client");
-                } else {
-                  alert("Usuário não encontrado");
                 }
               } catch (error) {
                 console.log(error);
@@ -54,7 +57,7 @@ export function Signup() {
       </div>
 
       <div
-        className="flex-1 flex flex-col justify-center 
+        className="md:flex-1 md:flex md:flex-col hidden  justify-center 
       items-center bg-gradient-to-r from-blue-600 
       to-blue-400 gap-4"
       >

@@ -3,7 +3,7 @@ import { LogOut } from "lucide-react"
 
 export function DropdownMenu (){
   function handleLogout(){
-    localStorage.clear()
+    localStorage.removeItem("token")
     window.location.href = "/auth/login"
   }
   

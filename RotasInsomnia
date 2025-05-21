@@ -3,11 +3,11 @@ name: books-reading
 meta:
   id: wrk_096de44738044c5fb63faec84b4deb77
   created: 1744655986119
-  modified: 1744655986119
+  modified: 1745587126980
 collection:
   - name: Books
     meta:
-      id: fld_0cc91a2e10fd4842843493e495461219
+      id: fld_13b947e60b274fd2a083e919daea072e
       created: 1744656901899
       modified: 1744824122675
       sortKey: -1744656901899
@@ -15,11 +15,11 @@ collection:
       - url: http://localhost:3000/api
         name: Index
         meta:
-          id: req_3fccf193adfc43aab305fbcc66fdb8d2
+          id: req_5341ac17438749f49b70bb0de4f2b4a3
           created: 1744656906379
-          modified: 1744742273651
+          modified: 1746208787191
           isPrivate: false
-          sortKey: -1744656906379
+          sortKey: -1744742042792
         method: GET
         headers:
           - name: User-Agent
@@ -35,20 +35,20 @@ collection:
       - url: "{{ _.BASE_URL }}/api"
         name: Create
         meta:
-          id: req_4399572f9ca146f38b0c2667c78cdc42
+          id: req_1d3f78544fa24975a305e85a7a9d4712
           created: 1744740219082
-          modified: 1744820954299
+          modified: 1746208792568
           isPrivate: false
-          sortKey: -1744740219082
+          sortKey: -1744741575063
         method: POST
         body:
           mimeType: application/json
           text: |
             {
-                "title": "Pequeno principe",
-                "author": "Miguel",
-                "description": "Da uma rosa.",
-                "releaseData": "2023-04-15"
+                "title": "teste",
+                "author": "teste",
+                "description": "teste",
+            		"coverImageUrl": ""
             }
         headers:
           - name: Content-Type
@@ -63,22 +63,23 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: http://localhost:3000/api/Diário de um banana
+      - url: http://localhost:3000/api/36
         name: Update
         meta:
-          id: req_a8a5c4532f724c08936fe020e7d2c579
+          id: req_962fdeafb4374eaab07424f7d7321d9e
           created: 1744742019239
-          modified: 1744742417430
+          modified: 1746282669990
           isPrivate: false
-          sortKey: -1744742019239
+          sortKey: -1744740219032
         method: PUT
         body:
           mimeType: application/json
           text: |-
             {
+            	"title":"Testei e aprovei",
               "author": "George Cluney",
               "description": "A magical story of Victor.",
-              "releaseDate": "1988-05-01"
+            	"releaseData": ""
             }
         headers:
           - name: Content-Type
@@ -93,15 +94,65 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: localhost:3000/api/Livro tal
+      - url: localhost:3000/api/14
         name: Delete
         meta:
-          id: req_de58e1baae8a4605b66b6fb2de4584c0
+          id: req_64fdcf3997b14bf59382ffc25c835279
           created: 1744742042692
-          modified: 1744742546840
+          modified: 1746209556928
           isPrivate: false
-          sortKey: -1744742042692
+          sortKey: -1744740218982
         method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/upload
+        name: Image
+        meta:
+          id: req_6886c5a2992b471982f1a4bb824081d8
+          created: 1745974769922
+          modified: 1746208782158
+          isPrivate: false
+          sortKey: -1744741119160.5
+        method: POST
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_83a0915a54464d6a83b2832d5cd96518
+              name: image
+              disabled: false
+              type: file
+              fileName: C:\Users\victor\Pictures\bunito dms.png
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/14
+        name: Get One Book
+        meta:
+          id: req_285cce770e794dbbb0f43a93e1213ad0
+          created: 1746208767649
+          modified: 1746208844260
+          isPrivate: false
+          sortKey: -1744742030965.5
+        method: GET
         headers:
           - name: User-Agent
             value: insomnia/11.0.2
@@ -115,23 +166,37 @@ collection:
           rebuildPath: true
   - name: Users
     meta:
-      id: fld_e82755e95f254d47b664e7c906bf9270
+      id: fld_9ca5171c48be4682b6223132c351d91c
       created: 1744820487443
       modified: 1744822046120
       sortKey: -1744820487444
     children:
       - url: "{{ _.BASE_URL }}/users"
-        name: New Request
+        name: Read Users
         meta:
-          id: req_b03ec325d8a144b3ba9f93aac16c206b
+          id: req_cfa8a3ce9c4b407d9474ee8e076d9517
           created: 1744820491201
-          modified: 1744820504797
+          modified: 1746987714960
           isPrivate: false
-          sortKey: -1744820491201
+          sortKey: -1745204644322
         method: GET
         headers:
           - name: User-Agent
             value: insomnia/11.0.2
+            id: pair_152a4ecc471f4287a6dcd4b45d4b7120
+          - id: pair_b1ab574bc3bc4ffdbbca01b4581c443c
+            name: Key
+            value: Authorization
+            disabled: false
+          - id: pair_96b85b5370d247fca1062d423646fda4
+            name: Value
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6Ik1BTkFHRVIiLCJpYXQiOjE3NDY5NDU5MjV9._6M0dVHYJ1W2ZT0-bLBl-Lv130J6zcVdwTEPi-0s8zs
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{% response 'body', 'req_c869c48e2f644a20854866095af82239',
+            'b64::JC50b2tlbg==::46b', 'never', 60 %}"
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -141,20 +206,78 @@ collection:
             store: true
           rebuildPath: true
       - url: "{{ _.BASE_URL }}/users"
-        name: New Request
+        name: Create
         meta:
-          id: req_be4a7067d4c84f28a10ad585dff75c63
+          id: req_0466b1de36084a9a8028f1faa8f4a94c
           created: 1744820493789
-          modified: 1744820989319
+          modified: 1746982461523
           isPrivate: false
-          sortKey: -1744820493789
+          sortKey: -1745956164358.5
         method: POST
         body:
           mimeType: application/json
           text: |-
             {
-            	"name":"Miguel",
-            	"role":"MANAGER"
+            	"name":"estenio",
+            	"password":"estenio123",
+            	"role":"EMPLOYEE"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6Ik1BTkFHRVIiLCJpYXQiOjE3NDY5NDU5MjV9._6M0dVHYJ1W2ZT0-bLBl-Lv130J6zcVdwTEPi-0s8zs
+          disabled: true
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/users/search?name=Nathalia"
+        name: Find by Name
+        meta:
+          id: req_7f03a1c799ce4a1b8c1ef18e23799c05
+          created: 1745588797443
+          modified: 1747846359386
+          isPrivate: false
+          sortKey: -1745588797443
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{% response 'body', 'req_c869c48e2f644a20854866095af82239',
+            'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/users/login"
+        name: Login
+        meta:
+          id: req_c869c48e2f644a20854866095af82239
+          created: 1746323531074
+          modified: 1746945923516
+          isPrivate: false
+          sortKey: -1745956164258.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name":"Victor",
+              "password":"Naosouumrobo2019"
             }
         headers:
           - name: Content-Type
@@ -171,17 +294,17 @@ collection:
           rebuildPath: true
   - name: ReadBook
     meta:
-      id: fld_9a0272aa7d634b3ab18e402aa68fc8a5
+      id: fld_c4e3b48890384adc90af8a39e60aa85e
       created: 1744822024650
       modified: 1744822024650
       sortKey: -1744822024650
     children:
-      - url: "{{ _.BASE_URL }}/api/read/user/1?author=George Cluney"
-        name: New Request
+      - url: "{{ _.BASE_URL }}/api/read/user/2"
+        name: pego o que leu e qual livro leu
         meta:
-          id: req_9ac67487fddc4bc9addb3a7d22f6a532
+          id: req_4d79e38e3546483ab5b4e11470d38f0a
           created: 1744822033352
-          modified: 1744824700341
+          modified: 1746987822135
           isPrivate: false
           sortKey: -1744822033352
         method: GET
@@ -196,12 +319,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.BASE_URL }}/api/read/user"
-        name: New Request
+      - url: "{{ _.BASE_URL }}/api/read/"
+        name: Id book and Id user
         meta:
-          id: req_94628657c45344c7be4d429d2a7b9bcb
+          id: req_6f6a999ea3e14374b95ffe483a763167
           created: 1744822036670
-          modified: 1744824207044
+          modified: 1746987560111
           isPrivate: false
           sortKey: -1744822036670
         method: POST
@@ -209,8 +332,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"userId": 1,
-            	"bookId": 5
+            	"userId": 2,
+            	"bookId": 4
             }
         headers:
           - name: Content-Type
@@ -225,18 +348,38 @@ collection:
             send: true
             store: true
           rebuildPath: true
+      - url: "{{ _.BASE_URL }}/api/read/ranking"
+        name: Ranking
+        meta:
+          id: req_62ac9949e52848eeab0a0c310a90fb17
+          created: 1746946777864
+          modified: 1746946821283
+          isPrivate: false
+          sortKey: -1746946777864
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
     id: jar_7332f54b86b536912f94b44da26d8998c3f4cdf0
-    created: 1744655986126
-    modified: 1744655986126
+    created: 1745587127014
+    modified: 1745587127014
 environments:
   name: Base Environment
   meta:
     id: env_7332f54b86b536912f94b44da26d8998c3f4cdf0
     created: 1744655986123
-    modified: 1744656871433
+    modified: 1745588561788
     isPrivate: false
   data:
     BASE_URL: localhost:3000
