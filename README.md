@@ -1,17 +1,19 @@
-## to run the project:
+# To run the project
 
-<h1>Backend</h1>
+<h2> 🎨 Frontend</h2>
 
-<p>run: npm i </br>
+<h3>follow the codes:</h3>
+<p>npm i </br>
+npm run dev
+</p>
+
+<h2> ⚙️ Backend</h2>
+
+<h3>follow the codes:</h3>
+npm i </br>
 npx prisma dev </br>
 npx prisma migrate dev </br>
 npx prisma generate </br>
-npm run dev
+npm run dev 
 </p>
 
-<h1>Frontend</h1>
-
-
-<p>run: npm i </br>
-npm run dev
-</p>
